@@ -1,0 +1,23 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Glossary</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 12.html" title="Chapter&nbsp;12.&nbsp;Dynamic Range"><link rel="prev" href="Tut12 In Review.html" title="In Review"><link rel="next" href="Tutorial 13.html" title="Chapter&nbsp;13.&nbsp;Lies and Impostors"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Glossary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut12 In Review.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;12.&nbsp;Dynamic Range</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tutorial 13.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e12478"></a>Glossary</h2></div></div></div><div class="glosslist"><dl><dt>material properties</dt><dd><p>The set of inputs to the lighting equation that represent the
+                        characteristics of a surface. This includes the surface's normal, diffuse
+                        reflectance, specular reflectance, any specular power values, and so forth.
+                        The source of these values can come from many sources: uniform values for an
+                        object, fragment-shader inputs, or potentially other sources.</p></dd><dt>instance name</dt><dd><p>For uniform blocks (or other kinds of interface blocks), this name is used
+                        within a shader to name-qualifier the members of the block. These are
+                        optional, unless there is a naming conflict, or unless an array needs to be
+                        specified.</p></dd><dt>light clipping</dt><dd><p>Light values drawn to the screen are clamped to the range [0, 1]. When
+                        lighting produces values outside of this range, the light is said to be
+                        clipped by the range. This produces a very bright, flat section that loses
+                        all detail and distinction in the image. It is something best
+                        avoided.</p></dd><dt>high dynamic range lighting</dt><dd><p>Lighting that uses values outside of the [0, 1] range. This allows for the
+                        use of a full range of lighting intensities.</p></dd><dt>tone mapping</dt><dd><p>The process of mapping HDR values to a [0, 1] range. This may or may not
+                        be a linear mapping.</p></dd><dt>colorspace</dt><dd><p>The set of reference colors that define a way of representing a color in
+                        computer graphics, and the function mapping between those reference colors
+                        and the actual colors. All colors are defined relative to a particular
+                        colorspace.</p></dd><dt>linear colorspace</dt><dd><p>A colorspace where the brightness of a color varies linearly with its
+                        values. Doubling the value of a color doubles its brightness.</p></dd><dt>gamma correction</dt><dd><p>The process of converting from a linear colorspace to a non-linear
+                        colorspace that a display device expects, usually through the use of a power
+                        function. This process ensures that the display produces an image that is
+                        linear.</p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut12 In Review.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 12.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tutorial 13.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">In Review&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Lies and Impostors</td></tr></table></div></body></html>

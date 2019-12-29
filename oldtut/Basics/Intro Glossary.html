@@ -1,0 +1,55 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Glossary</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Introduction.html" title="Introduction"><link rel="prev" href="Intro What is OpenGL.html" title="What is OpenGL"><link rel="next" href="Tutorial 01.html" title="Chapter&nbsp;1.&nbsp;Hello, Triangle!"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Glossary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Intro What is OpenGL.html">Prev</a>&nbsp;</td><th width="60%" align="center">Introduction</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tutorial 01.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Intro_Glossary"></a>Glossary</h2></div></div></div><div class="glosslist"><dl><dt>vector</dt><dd><p>A value composed of an ordered sequence of other values. The number of
+                        values stored in a vector is its dimensionality. Vectors can have math
+                        operations performed on them as a whole.</p></dd><dt>scalar</dt><dd><p>A single, non-vector value. A one-dimensional vector can be considered a
+                        scalar.</p></dd><dt>vector position</dt><dd><p>A vector that represents a position.</p></dd><dt>vector direction</dt><dd><p>A vector that represents a direction.</p></dd><dt>vector component</dt><dd><p>One of the values within a vector.</p></dd><dt>component-wise operation</dt><dd><p>An operation on a vector that applies something to each component of the
+                        vector. The results of a component-wise operation is a vector of the same
+                        dimension as the input(s) to the operation. Many vector operations are
+                        component-wise.</p></dd><dt>unit vector</dt><dd><p>A vector who's length is exactly one. These represent purely directional
+                        vectors.</p></dd><dt>vector normalization</dt><dd><p>The process of converting a vector into a unit vector that points in the
+                        same direction as the original vector.</p></dd><dt>pixel</dt><dd><p>The smallest division of a digital image. A pixel has a particular color in a
+                        particular colorspace.</p></dd><dt>image</dt><dd><p>A two-dimensional array of pixels.</p></dd><dt>rendering</dt><dd><p>The process of taking the source 3D world and converting it into a 2D image
+                        that represents a view of that world from a particular angle.</p></dd><dt>rasterization</dt><dd><p>A particular rendering method, used to convert a series of 3D triangles into a
+                        2D image.</p></dd><dt>geometry, model, mesh</dt><dd><p>A single object in 3D space made of triangles.</p></dd><dt>vertex</dt><dd><p>One of the 3 elements that make up a triangle. Vertices can contain arbitrary
+                        of data, but among that data is a 3-dimensional position representing the
+                        location of the vertex in 3D space.</p></dd><dt>clip space, clip coordinates</dt><dd><p>A region of three-dimensional space into which vertex positions are
+                        transformed. These vertex positions are 4 dimensional quantities. The fourth
+                        component (W) of clip coordinates represents the visible range of clip space for
+                        that vertex. So the X, Y, and Z component of clip coordinates must be between
+                        [-W, W] to be a visible part of the world.</p><p>In clip space, positive X goes right, positive Y up, and positive Z
+                        away.</p><p>Clip-space vertices are output by the vertex processing stage of the rendering
+                        pipeline.</p></dd><dt>clipping</dt><dd><p>The process of taking a triangle in clip coordinates and splitting it if
+                        one or more of its vertices is outside of clip space.</p></dd><dt>normalized device coordinates</dt><dd><p>These are clip coordinates that have been divided by their fourth component.
+                        This makes this range of space the same for all components. Vertices with
+                        positions on the range [-1, 1] are visible, and other vertices are not.</p></dd><dt>window space, window coordinates</dt><dd><p>A region of three-dimensional space that normalized device coordinates are
+                        mapped to. The X and Y positions of vertices in this space are relative to the
+                        destination image. The origin is in the bottom-left, with positive X going right
+                        and positive Y going up. The Z value is a number on the range [0, 1], where 0 is
+                        the closest value and 1 is the farthest. Vertex positions outside of this range
+                        are not visible.</p></dd><dt>scan conversion</dt><dd><p>The process of taking a triangle in window space and converting it into a
+                        number of fragments based on projecting it onto the pixels of the output
+                        image.</p></dd><dt>sample</dt><dd><p>A discrete location within the bounds of a pixel that determines whether to
+                        generate a fragment from scan converting the triangle. The area of a single
+                        pixel can have multiple samples, which can generate multiple fragments.</p></dd><dt>fragment</dt><dd><p>A single element of a scan converted triangle. A fragment can contain
+                        arbitrary data, but among that data is a 3-dimensional position, identifying the
+                        location on the triangle in window space where this fragment originates
+                        from.</p></dd><dt>invariance guarantee</dt><dd><p>A guarantee provided by OpenGL, such that if you provide binary-identical
+                        inputs to the vertex processing, while all other state remains exactly
+                        identical, then the exact same vertex in clip-space will be output.</p></dd><dt>colorspace</dt><dd><p>The set of reference colors that define a way of representing a color in
+                        computer graphics, and the function mapping between those reference colors
+                        and the actual colors. All colors are defined relative to a particular
+                        colorspace.</p></dd><dt>shader</dt><dd><p>A program designed to be executed by a renderer, in order to perform some
+                        user-defined operations.</p></dd><dt>shader stage</dt><dd><p>A particular place in a rendering pipeline where a shader can be executed
+                        to perform a computation. The results of this computation will be fed to the
+                        next stage in the rendering pipeline.</p></dd><dt>OpenGL</dt><dd><p>A specification that defines the effective behavior of a
+                        rasterization-based rendering system.</p></dd><dt>OpenGL context</dt><dd><p>A specific set of state used for rendering. The OpenGL context is like a
+                        large C-style struct that contains a large number of fields that can be
+                        accessed. If you were to create multiple windows for rendering, each one
+                        would have its own OpenGL context.</p></dd><dt>object binding</dt><dd><p>Objects can be bound to a particular location in the OpenGL context. When
+                        this happens, the state within the object takes the place of a certain set
+                        of state in the context. There are multiple binding points for objects, and
+                        each kind of object can be bound to certain binding points. Which bind point
+                        an object is bound to determines what state the object overrides.</p></dd><dt>Architectural Review Board</dt><dd><p>The body of the Khronos Group that governs the OpenGL
+                        specification.</p></dd><dt>OpenGL Implementation</dt><dd><p>The software that implements the OpenGL specification for a particular
+                        system.</p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Intro What is OpenGL.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Introduction.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tutorial 01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">What is OpenGL&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;1.&nbsp;Hello, Triangle!</td></tr></table></div></body></html>

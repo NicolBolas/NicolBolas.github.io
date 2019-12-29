@@ -1,0 +1,27 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Glossary</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 13.html" title="Chapter&nbsp;13.&nbsp;Lies and Impostors"><link rel="prev" href="Tut13 In Review.html" title="In Review"><link rel="next" href="../Texturing/Texturing.html" title="Part&nbsp;IV.&nbsp;Texturing"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Glossary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut13 In Review.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;13.&nbsp;Lies and Impostors</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="../Texturing/Texturing.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e13403"></a>Glossary</h2></div></div></div><div class="glosslist"><dl><dt>billboard, flat card</dt><dd><p>Terms used to describe the actual geometry used for impostors that are
+                        based on rendering camera-aligned shapes.</p></dd><dt>impostor</dt><dd><p>Any object who's geometry does not even superficially resemble the final
+                        rendered product. In these cases, the mesh geometry is usually just a way to
+                        designate an area of the screen to draw to, while the fragment shader does
+                        the real work.</p></dd><dt>ray tracing</dt><dd><p>For the purposes of this book, ray tracing is a technique whereby a
+                        mathematical object is tested against a ray (direction + position), to see
+                        if the ray intersects the object. At the point of intersection, one can
+                        generate a normal. With a position and normal in hand, one can use lighting
+                        equations to produce an image.</p></dd><dt>early depth test, early-z</dt><dd><p>An optimization in the depth test, where the incoming fragment's depth
+                        value is tested <span class="emphasis"><em>before</em></span> the fragment shader executes. If
+                        the fragment shader is long, this can save a great deal of time. If the
+                        fragment shader exercises the option to modify or replace the fragment's
+                        depth, then the early depth test optimization will not be active.</p></dd><dt>interleaving</dt><dd><p>A way of storing vertex attributes in a buffer object. This involves
+                        entwining the attribute data, so that most or all of each vertex's
+                        attributes are spatially adjacent in the buffer object. This is as opposed
+                        to giving each vertex attribute its own array. Interleaving can lead to
+                        higher rendering performance in vertex transfer limited cases.</p></dd><dt>geometry shaders</dt><dd><p>A programmable stage between the vertex shader and the
+                        clipping/rasterization state. Geometry shaders take a primitive of a certain
+                        type as input, and returns zero or more primitives of a possibly different
+                        type as output. The vertex data taken as input does not have to match the
+                        vertex data taken as output, but the geometry shader's output interface must
+                        match that of the fragment shader's input interface.</p></dd><dt>interface block</dt><dd><p>A ordered grouping of uniforms, shader inputs or shader outputs. When used
+                        with uniforms, these are called uniform blocks. These are useful for name
+                        scoping, so that inputs and outputs can use the name that is most convenient
+                        and descriptive.</p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut13 In Review.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 13.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="../Texturing/Texturing.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">In Review&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Part&nbsp;IV.&nbsp;Texturing</td></tr></table></div></body></html>

@@ -1,0 +1,58 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Rotation</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 06.html" title="Chapter&nbsp;6.&nbsp;Objects in Motion"><link rel="prev" href="Tut06 Scale.html" title="Scale"><link rel="next" href="Tut06 Fun with Matrices.html" title="Fun with Matrices"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Rotation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut06 Scale.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;6.&nbsp;Objects in Motion</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tut06 Fun with Matrices.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e6298"></a>Rotation</h2></div></div></div><p>A <em class="glossterm">rotation</em> transformation is the result of the orientation of
+            the initial space being different from the orientation of the destination space. The
+            basis vectors of the space do not change orientation relative to one another, but
+            relative to the destination coordinate system, they are pointed in different directions
+            than they were in their own coordinate system.</p><p>A rotation looks like this:</p><div class="figure"><a name="d0e6309"></a><p class="title"><b>Figure&nbsp;6.6.&nbsp;Coordinate Rotation in 2D</b></p><div class="figure-contents"><div class="mediaobject"><img src="RotationTransform.svg" alt="Coordinate Rotation in 2D"></div></div></div><br class="figure-break"><p>Rotations are usually considered the most complex of the basic transformations,
+            primarily because of the math involved in computing the transformation matrix.
+            Generally, rotations are looked at as an operation, such as rotating around a particular
+            basis vector or some such. The prior part of the tutorial laid down some of the
+            groundwork that will make this much simpler.</p><p>First, let's look back at our equation for determining what the position of a
+            coordinate is relative to certain coordinate space:</p><div class="informalequation"><div class="mediaobject"><img src="CoordinateEquation.svg"></div></div><p>Does not this look a bit familiar? No? Maybe this look at vector-matrix multiplication
+            will jog your memory:</p><div class="informalequation"><div class="mediaobject"><img src="VectorMatrixMultiplication.svg"></div></div><p>Still nothing? Perhaps an alternate look would help:</p><div class="equation"><a name="d0e6331"></a><p class="title"><b>Equation&nbsp;6.5.&nbsp;Vectorized Matrix Multiplication</b></p><div class="equation-contents"><div class="mediaobject"><img src="CoordSysMatrixMultiply.svg"></div></div></div><br class="equation-break"><p>Does it look familiar <span class="emphasis"><em>now</em></span>?</p><p>What this tells us is that the columns of our transformation matrices are, and have
+                <span class="emphasis"><em>always</em></span> been, nothing more than the axes of a coordinate system.
+            Except for the fourth column; because the input position has a 1 in the W, it acts as an
+            offset.</p><p>Transformation from one space to another ultimately means this: taking the basis
+            vectors and origin point from the original coordinate system and re-expressing them
+            relative to the destination coordinate system. The transformation matrix from one space
+            to another contains the basis vectors and origin of the original coordinate system, but
+            the <span class="emphasis"><em>values</em></span> of those basis vectors and origin are relative to the
+            destination coordinate system.</p><p>Earlier, we said that numerical coordinates of a space must be expressed relative to
+            another space. A matrix is a numerical representation of a coordinate system, and its
+            values are expressed in the destination coordinate system. Therefore, a transformation
+            matrix takes values in one coordinate system and transforms them into another. It does
+            this by taking the basis vectors and origin of the input coordinate system and
+            represents them relative to the output space. To put it another way, the transformation
+            from space A to space B is what space A looks like from an observer in space B.</p><p>A rotation matrix is just a transform that expresses the basis vectors of the input
+            space in a different orientation. The length of the basis vectors will be the same, and
+            the origin will not change. Also, the angle between the basis vectors will not change.
+            All that changes is the relative direction of all of the basis vectors.</p><p>Therefore, a rotation matrix is not really a <span class="quote">&#8220;<span class="quote">rotation</span>&#8221;</span> matrix; it is an
+                <span class="emphasis"><em>orientation</em></span> matrix. It defines the orientation of one space
+            relative to another space. Remember this, and you will avoid many pitfalls when you
+            start dealing with more complex transformations.</p><p>For any two spaces, the orientation transformation between then can be expressed as
+            rotating the source space by some angle around a particular axis (specified in the
+            initial space). This is true for any change of orientation.</p><p>A common rotation question is to therefore compute a rotation around an arbitrary
+            axis. Or to put it more correctly, to determine the orientation of a space if it is
+            rotated around an arbitrary axis. The axis of rotation is expressed in terms of the
+            initial space. In 2D, there is only one axis that can be rotated around and still remain
+            within that 2D plane: the Z-axis.</p><p>In 3D, there are many possible axes of rotation. It does not have to be one of the
+            initial space's basis axes; it can be any arbitrary direction. Of course, the problem is
+            made much simpler if one rotates only around the primary axes.</p><p>Deriving these matrix equations is beyond the scope of this tutorial; so instead, we
+            will simply provide them. To perform rotations along the primary axes, use the following
+            matrices:</p><div class="equation"><a name="d0e6372"></a><p class="title"><b>Equation&nbsp;6.6.&nbsp;Axial Rotation Matrices</b></p><div class="equation-contents"><div class="mediaobject"><img src="AxialRotationMatrices.svg"></div></div></div><br class="equation-break"><p>When using the standard C/C++ library <code class="function">sin</code> and
+                <code class="function">cos</code> functions, the angles must be in radians.</p><p>As useful as these are, the more generic equation for rotation by an angle about an
+            arbitrary axis is as follows.</p><div class="equation"><a name="d0e6388"></a><p class="title"><b>Equation&nbsp;6.7.&nbsp;Angle/Axis Rotation Matrix</b></p><div class="equation-contents"><div class="mediaobject"><img src="AngleAxisRotationMatrix.svg"></div></div></div><br class="equation-break"><p>All of these matrices are such that, from the point of view of an observer looking
+            down the axis of rotation (the positive direction of the axis is pointed into the eye of
+            the observer), the object rotates counter-clockwise with positive angles.</p><p>The <span class="propername">Rotations</span> tutorial shows off each of these
+            rotation matrix functions. Similar to how the others work, there are multiple instances
+            rendered based on functions.</p><div class="figure"><a name="d0e6401"></a><p class="title"><b>Figure&nbsp;6.7.&nbsp;Rotation Project</b></p><div class="figure-contents"><div class="mediaobject"><img src="Rotations.png" alt="Rotation Project"></div></div></div><br class="figure-break"><p>The function that builds the transformation matrix looks like this:</p><div class="example"><a name="d0e6409"></a><p class="title"><b>Example&nbsp;6.4.&nbsp;Rotation Transformation Building</b></p><div class="example-contents"><pre class="programlisting">glm::mat4 ConstructMatrix(<span class="code-keyword">float</span> fElapsedTime)
+{
+    <span class="code-keyword">const</span> glm::mat3 &amp;rotMatrix = CalcRotation(fElapsedTime);
+    glm::mat4 theMat(rotMatrix);
+    theMat[<span class="code-number">3</span>] = glm::vec4(offset, <span class="code-number">1.0f</span>);
+    
+    <span class="code-keyword">return</span> theMat;
+}</pre></div></div><br class="example-break"><p>The constructor of glm::mat4 that takes a glm::mat3 generates a 4x4 matrix with the
+            3x3 matrix in the top-left corner, and all other positions 0 except the bottom-left
+            corner, which is set to 1. As with much of GLM, this works in GLSL as well.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut06 Scale.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 06.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tut06 Fun with Matrices.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Scale&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Fun with Matrices</td></tr></table></div></body></html>

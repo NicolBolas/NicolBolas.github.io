@@ -1,0 +1,55 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>In Review</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 03.html" title="Chapter&nbsp;3.&nbsp;OpenGL's Moving Triangle"><link rel="prev" href="Tut03 On Vertex Shader Performance.html" title="On Vertex Shader Performance"><link rel="next" href="Tut03 Glossary.html" title="Glossary"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">In Review</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut03 On Vertex Shader Performance.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;3.&nbsp;OpenGL's Moving Triangle</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tut03 Glossary.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e3498"></a>In Review</h2></div></div></div><p>In this tutorial, you have learned about the following:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Buffer object contents can be updated partially with the
+                        <code class="function">glBufferSubData</code> function. This function performs the
+                    equivalent of a <code class="function">memcpy</code> operation.</p></li><li class="listitem"><p>Uniform variables in shaders are variables that are set by code outside of
+                    GLSL. They only change between rendering calls, so they are uniform over the
+                    surface of any particular triangle.</p></li><li class="listitem"><p>Uniform variable values are stored with the program object. This state is
+                    preserved until it is explicitly changed.</p></li><li class="listitem"><p>Uniform variables defined in two GLSL stages that have the same name and type
+                    are considered the same uniform. Setting this uniform in the program object will
+                    change its value for both stages.</p></li></ul></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e3523"></a>Further Study</h3></div></div></div><p>There are several things you can test to see what happens with these
+                tutorials.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>With <code class="filename">vertCalcOffset.cpp</code>, change it so that it draws
+                        two triangles moving in a circle, with one a half
+                            <code class="varname">loopDuration</code> ahead of the other. Simply change the
+                        uniforms after the <code class="function">glDrawArrays</code> call and then make the
+                            <code class="function">glDrawArrays</code> call again. Add half of the loop
+                        duration to the time before setting it the second time.</p></li><li class="listitem"><p>In <code class="filename">fragChangeColor.cpp</code>, change it so that the
+                        fragment program bounces between <code class="varname">firstColor</code> and
+                            <code class="varname">secondColor</code>, rather than popping from
+                            <code class="varname">secondColor</code> back to first at the end of a loop. The
+                        first-to-second-to-first transition should all happen within a single
+                            <code class="function">fragLoopDuration</code> time interval. In case you are
+                        wondering, GLSL supports the <code class="literal">if</code> statement, as well as the
+                        ?: operator. For bonus points however, do it without an explicit conditional
+                        statement; feel free to use a sin or cos function to do this.</p></li><li class="listitem"><p>Using our knowledge of uniforms, go back to <a class="link" href="../Basics/Tutorial 02.html#FragPosition" title="Fragment Position Display">Tutorial 2's FragPosition</a> tutorial. Modify the code so that it
+                        takes a uniform that describes the window's height, rather than using a
+                        hard-coded value. Change the <code class="function">reshape</code> function to bind
+                        the program and modify the uniform with the new height.</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e3574"></a>OpenGL Functions of Note</h3></div></div></div><div class="glosslist"><dl><dt>glBufferSubData</dt><dd><p>This function copies memory from the user's memory address into a
+                            buffer object. This function takes a byte offset into the buffer object
+                            to begin copying, as well as a number of bytes to copy.</p><p>When this function returns control to the user, you are free to
+                            immediately deallocate the memory you owned. So you can allocate and
+                            fill a piece of memory, call this function, and immediately free that
+                            memory with no hazardous side effects. OpenGL will not store the pointer
+                            or make use of it later.</p></dd><dt>glGetUniformLocation</dt><dd><p>This function retrieves the location of a uniform of the given name
+                            from the given program object. If that uniform does not exist or was not
+                            considered in use by GLSL, then this function returns -1, which is not a
+                            valid uniform location.</p></dd><dt>glUniform*</dt><dd><p>Sets the given uniform in the program currently in use (set by
+                                <code class="function">glUseProgram</code>) to the given value. This is not
+                            merely one function, but an entire suite of functions that take
+                            different types.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e3601"></a>GLSL Functions of Note</h3></div></div></div><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr><td><code class="funcdef">vec <b class="fsfunc">mod</b>(</code></td><td>vec <var class="pdparam">numerator</var>, </td></tr><tr><td>&nbsp;</td><td>float <var class="pdparam">denominator</var><code>)</code>;</td></tr></table><div class="funcprototype-spacer">&nbsp;</div></div><p>The <code class="function">mod</code> function takes the modulus of the
+                    <em class="parameter"><code>numerator</code></em> by the <em class="parameter"><code>denominator</code></em>. The
+                modulus can be thought of as a way of causing a loop; the return value will be on
+                the range [0, <em class="parameter"><code>denominator</code></em>) in a looping fashion.
+                Mathematically, it is defined as <em class="parameter"><code>numerator</code></em> -
+                    (<em class="parameter"><code>denominator</code></em> *
+                    <code class="function">FLOOR</code>(<em class="parameter"><code>numerator</code></em> /
+                    <em class="parameter"><code>denominator</code></em>)), where <code class="function">FLOOR</code> rounds a
+                floating-point value down towards the smallest whole number.</p><p>The type <span class="type">vec</span> can be either <span class="type">float</span> or any vector type. It
+                must be the same type for all parameters. If a vector denominator is used, then the
+                modulus is taken for each corresponding component. The function returns a vector of
+                the same size as its <em class="parameter"><code>numerator</code></em> type.</p><div class="funcsynopsis"><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr><td><code class="funcdef">vec <b class="fsfunc">cos</b>(</code></td><td>vec <var class="pdparam">angle</var><code>)</code>;</td></tr></table><div class="funcprototype-spacer">&nbsp;</div><table border="0" summary="Function synopsis" cellspacing="0" cellpadding="0" class="funcprototype-table"><tr><td><code class="funcdef">vec <b class="fsfunc">sin</b>(</code></td><td>vec <var class="pdparam">angle</var><code>)</code>;</td></tr></table><div class="funcprototype-spacer">&nbsp;</div></div><p>Returns the trigonometric <a class="link" href="http://en.wikipedia.org/wiki/Sine#Sine.2C_cosine_and_tangent" target="_top">cosine
+                    or sine</a>, respectively, of the given <em class="parameter"><code>angle.</code></em> The
+                    <em class="parameter"><code>angle</code></em> is given in units of radians. If the
+                    <em class="parameter"><code>angle</code></em> is a vector, then the returned vector will be of
+                the same size, and will be the cosine or sine of each component of the
+                    <em class="parameter"><code>angle</code></em> vector.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut03 On Vertex Shader Performance.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 03.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tut03 Glossary.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">On Vertex Shader Performance&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Glossary</td></tr></table></div></body></html>

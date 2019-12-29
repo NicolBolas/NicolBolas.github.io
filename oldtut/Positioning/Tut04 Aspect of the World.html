@@ -1,0 +1,65 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Aspect of the World</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 04.html" title="Chapter&nbsp;4.&nbsp;Objects at Rest"><link rel="prev" href="Tut04 The Matrix Has You.html" title="The Matrix has You"><link rel="next" href="Tut04 In Review.html" title="In Review"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Aspect of the World</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut04 The Matrix Has You.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;4.&nbsp;Objects at Rest</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tut04 In Review.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e4416"></a>Aspect of the World</h2></div></div></div><p>If you run the last program, and resize the window, the viewport resizes with it.
+            Unfortunately, this also means that what was once a rectangular prism with a square
+            front becomes elongated.</p><div class="figure"><a name="d0e4422"></a><p class="title"><b>Figure&nbsp;4.10.&nbsp;Bad Aspect Ratio</b></p><div class="figure-contents"><div class="mediaobject"><img src="MatrixPerspectiveSkew.png" alt="Bad Aspect Ratio"></div></div></div><br class="figure-break"><p>This is a problem of <em class="glossterm">aspect ratio</em>, the ratio of an image's
+            width to its height. Currently, when you change the window's dimensions, the code calls
+                <code class="function">glViewport</code> to tell OpenGL the new size. This changes OpenGL's
+            viewport transform, which goes from normalized device coordinates to window coordinates.
+            NDC space has a 1:1 aspect ratio; the width and height of NDC space is 2x2. As long as
+            window coordinates also has a 1:1 width to height ratio, objects that appear square in
+            NDC space will still be square in window space. Once window space became non-1:1, it
+            caused the transformation to also become not a square.</p><p>What exactly can be done about this? Well, that depends on what you intend to
+            accomplish by making the window bigger.</p><p>One simple way to do this is to prevent the viewport from ever becoming non-square.
+            This can be done easily enough by changing the <code class="function">reshape</code> function to
+            be this:</p><div class="example"><a name="d0e4443"></a><p class="title"><b>Example&nbsp;4.6.&nbsp;Square-only Viewport</b></p><div class="example-contents"><pre class="programlisting"><span class="code-keyword">void</span> reshape (<span class="code-keyword">int</span> w, <span class="code-keyword">int</span> h)
+{
+    <span class="code-keyword">if</span>(w &lt; h)
+        glViewport(<span class="code-number">0</span>, <span class="code-number">0</span>, (GLsizei) w, (GLsizei) w);
+    <span class="code-keyword">else</span>
+        glViewport(<span class="code-number">0</span>, <span class="code-number">0</span>, (GLsizei) h, (GLsizei) h);
+}</pre></div></div><br class="example-break"><p>Now if you resize the window, the viewport will always remain a square. However, if
+            the window is non-square, there will be a lot of empty space either to the right or
+            below the viewport area. This space cannot be rendered into with triangle drawing
+            commands (for reasons that we will see in the next tutorial).</p><p>This solution has the virtue of keeping the viewable region of the world fixed,
+            regardless of the shape of the viewport. It has the disadvantage of wasting window
+            space.</p><p>What do we do if we want to use as much of the window as possible? There is a way to
+            do this.</p><p>Go back to the definition of the problem. NDC space is a [-1, 1] cube. If an object in
+            NDC space is a square, in order for it to be a square in window coordinates, the
+            viewport must also be a square. Conversely, if you want non-square window coordinates,
+            the object in NDC space <span class="emphasis"><em>must not be a square.</em></span></p><p>So our problem is with the implicit assumption that squares in camera space need to
+            remain squares throughout. This is not the case. To do what we want, we need to
+            transform things into clip space such that they are the correct non-square shape that,
+            once the perspective divide and viewport transform converts them into window
+            coordinates, they are again square.</p><p>Currently, our perspective matrix defines a square-shaped frustum. That is, the top
+            and bottom of the frustum (if it were visualized in camera space) would be squares. What
+            we need to do instead is create a rectangular frustum.</p><div class="figure"><a name="d0e4462"></a><p class="title"><b>Figure&nbsp;4.11.&nbsp;Widescreen Aspect Ratio Frustum</b></p><div class="figure-contents"><div class="mediaobject"><img src="RectViewFrustum.svg" alt="Widescreen Aspect Ratio Frustum"></div></div></div><br class="figure-break"><p>We already have some control over the shape of the frustum. We said originally that we
+            did not need to move the eye position from the origin because we could simply scale the
+            X and Y positions of everything to achieve a similar effect. When we do this, we scale
+            the X and Y by the same value; this produces a uniform scale. It also produces a square
+            frustum, as seen in camera space. Since we want a rectangular frustum, we need to use a
+            non-uniform scale, where the X and Y positions are scaled by different values.</p><p>What this will do is show <span class="emphasis"><em>more</em></span> of the world. But in what
+            direction do we want to show more? Human vision tends to be more horizontal than
+            vertical. This is why movies tend to use a minimum of 16:9 width:height aspect ratio
+            (most use more width than that). So it is usually the case that you design a view for a
+            particular height, then adjust the width based on the aspect ratio.</p><p>This is done in the <span class="propername">AspectRatio</span> tutorial. This code
+            uses the same shaders as before; it simply modifies the perspective matrix in the
+                <code class="function">reshape</code> function.</p><div class="example"><a name="d0e4483"></a><p class="title"><b>Example&nbsp;4.7.&nbsp;Reshape with Aspect Ratio</b></p><div class="example-contents"><pre class="programlisting"><span class="code-keyword">void</span> reshape (<span class="code-keyword">int</span> w, <span class="code-keyword">int</span> h)
+{
+    perspectiveMatrix[<span class="code-number">0</span>] = fFrustumScale / (w / (<span class="code-keyword">float</span>)h);
+    perspectiveMatrix[<span class="code-number">5</span>] = fFrustumScale;
+    
+    glUseProgram(theProgram);
+    glUniformMatrix4fv(perspectiveMatrixUnif, <span class="code-number">1</span>, GL_FALSE, perspectiveMatrix);
+    glUseProgram(<span class="code-number">0</span>);
+    
+    glViewport(<span class="code-number">0</span>, <span class="code-number">0</span>, (GLsizei) w, (GLsizei) h);
+}
+</pre></div></div><br class="example-break"><p>The matrix, now a global variable called <code class="varname">perspectiveMatrix</code>, gets
+            its other fields from the program initialization function just as before. The aspect
+            ratio code is only interested in the XY scale values.</p><p>Here, we change the X scaling based on the ratio of the width to the height. The Y
+            scaling is left alone.</p><p>Also, the offset used for positioning the prism was changed from (0.5, 0.5) to (1.5,
+            0.5). This means that part of the object is off the side of the viewport until you
+            resize the window. Changing the width shows more of the area; only by changing the
+            height do you actually make the objects bigger. The square always looks like a
+            square.</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut04 The Matrix Has You.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 04.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tut04 In Review.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The Matrix has You&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;In Review</td></tr></table></div></body></html>

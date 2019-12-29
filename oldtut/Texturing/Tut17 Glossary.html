@@ -1,0 +1,21 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Glossary</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 17.html" title="Chapter&nbsp;17.&nbsp;Spotlight on Textures"><link rel="prev" href="Tut17 In Review.html" title="In Review"><link rel="next" href="../Framebuffer/Framebuffer.html" title="Part&nbsp;V.&nbsp;Framebuffer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Glossary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut17 In Review.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;17.&nbsp;Spotlight on Textures</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="../Framebuffer/Framebuffer.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e16648"></a>Glossary</h2></div></div></div><div class="glosslist"><dl><dt>scene graph</dt><dd><p>The general term for a data structure that holds the objects within a
+                        particular scene. Objects in a scene graph often have parent-child
+                        relationships for their transforms, as well as references to the shaders,
+                        meshes, and textures needed to render them.</p></dd><dt>projective texturing</dt><dd><p>A texture mapping technique that generates texture coordinates to make a
+                        2D texture appear to have been projected onto a surface. This is done by
+                        transforming the vertex positions of objects into the scene through a
+                        projective series of transformations into the space of the texture
+                        itself.</p></dd><dt>spotlight source</dt><dd><p>A light source that emits from a position in the world in a generally
+                        conical shape along a particular direction. Some spot lights have a full
+                        orientation, while others only need a direction. Spotlights can be
+                        implemented in shader code, or more generally via projective texturing
+                        techniques.</p></dd><dt>cube map texture</dt><dd><p>A type of texture that uses 6 2D images to represent faces of a cube. It
+                        takes 3D texture coordinates that represent a direction from the center of a
+                        cube onto one of these faces. Thus, each texel on each of the 6 faces comes
+                        from a unique direction. Cube maps allow data based on directions to vary
+                        based on stored texture data.</p></dd><dt>texture compression</dt><dd><p>A set of image formats that stores texel data in a small format that is
+                        optimized for texture access. These formats are not as small as specialized
+                        image file formats, but they are designed for fast GPU texture fetch access,
+                        while still saving significant graphics memory.</p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut17 In Review.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 17.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="../Framebuffer/Framebuffer.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">In Review&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Part&nbsp;V.&nbsp;Framebuffer</td></tr></table></div></body></html>

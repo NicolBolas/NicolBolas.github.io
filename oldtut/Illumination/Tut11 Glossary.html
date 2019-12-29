@@ -1,0 +1,40 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Glossary</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 11.html" title="Chapter&nbsp;11.&nbsp;Shinies"><link rel="prev" href="Tut11 In Review.html" title="In Review"><link rel="next" href="Tutorial 12.html" title="Chapter&nbsp;12.&nbsp;Dynamic Range"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Glossary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut11 In Review.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;11.&nbsp;Shinies</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tutorial 12.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e11536"></a>Glossary</h2></div></div></div><div class="glosslist"><dl><dt>specular reflection</dt><dd><p>A mirror-like reflection of light from a surface. Specular reflections
+                        reflect light; thus, the color the viewer sees is strongly based on the view
+                        angle relative to the light. Specular reflections often do not affect the
+                        color of the incoming light.</p></dd><dt>specular highlights</dt><dd><p>Mirror-like reflections directly from light sources. Since light sources
+                        are brighter than light reflected by other objects, modelling only specular
+                        highlights can provide useful realism without having to model reflections
+                        from light produced by other objects in the scene.</p></dd><dt>angle of view, viewing angle</dt><dd><p>The angle between the surface normal and the direction to the
+                        viewer/camera.</p></dd><dt>microfacet model</dt><dd><p>Describes a surface as a number of flat planes called microfacets. Each
+                        microfacet reflects light using a simple lighting model. The light from a
+                        portion of the surface is simply the aggregate of the light from all of the
+                        microfacets of the surface. The statistical distribution of microfacet
+                        directions on a surface becomes an integral part of the lighting equation.
+                        The normal of a surface at a point is the average normal of the microfacets
+                        of that part of the surface.</p><p>The microfacet model can be used to model the reflectance characteristics
+                        of rough surfaces.</p></dd><dt>Phong specular model</dt><dd><p>A simple model for creating specular highlights. It uses a power function
+                        to determine the distribution of microfacets of the surface. The base of the
+                        power function is the cosine of the angle between the view direction and the
+                        direction of perfect reflection along the surface normal. The exponent is an
+                        arbitrary value on the range (0, &#8734;); large values describe increasingly
+                        shiny surfaces, while small values are for rough surfaces.</p></dd><dt>half-angle vector</dt><dd><p>The vector halfway between the direction towards the light and the view
+                        direction. When the half-angle vector is oriented exactly with the surface
+                        normal, then the view direction is oriented along the reflection direction.
+                        For a given light and view direction, it is the direction that the surface
+                        normal would need to be facing for a direct light reflection to go from the
+                        light source to the viewer.</p></dd><dt>Blinn-Phong specular model</dt><dd><p>A simple model for creating specular highlights. Like standard Phong, it
+                        uses a power function to model the distribution of microfacets. The base of
+                        the power function is the cosine of the angle between the half-angle vector
+                        and the surface normal. The exponent is an arbitrary value on the range (0,
+                        &#8734;); large values describe increasingly shiny surfaces, while small values
+                        are for rough surfaces.</p></dd><dt>Gaussian distribution, normal distribution</dt><dd><p>A common statistical distribution. It defines the familiar
+                            <span class="quote">&#8220;<span class="quote">bell-shaped curve,</span>&#8221;</span> with the average value at the highest
+                        point of the distribution.</p></dd><dt>Gaussian specular model</dt><dd><p>A model for creating specular highlights. It uses the Gaussian
+                        distribution to model the distribution of microfacets on a surface. It uses
+                        a value to control the distribution; this value ranges on (0, 1], where
+                        small numbers are smooth surfaces and large numbers are rough
+                        surfaces.</p></dd><dt>inverse cosine, arc cosine</dt><dd><p>Performs the opposite of the cosine function. The cosine function takes
+                        angles and returns a value on the range [-1, 1]. The inverse cosine takes
+                        values on the range [-1, 1] and returns an angle in radians.</p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut11 In Review.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 11.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tutorial 12.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">In Review&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Dynamic Range</td></tr></table></div></body></html>

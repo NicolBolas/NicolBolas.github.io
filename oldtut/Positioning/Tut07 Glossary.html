@@ -1,0 +1,32 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>Glossary</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 07.html" title="Chapter&nbsp;7.&nbsp;World in Motion"><link rel="prev" href="Tut07 In Review.html" title="In Review"><link rel="next" href="Tutorial 08.html" title="Chapter&nbsp;8.&nbsp;Getting Oriented"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Glossary</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut07 In Review.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;7.&nbsp;World in Motion</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tutorial 08.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7925"></a>Glossary</h2></div></div></div><div class="glosslist"><dl><dt>world space</dt><dd><p>An intermediate space between model space and camera space. Conceptually,
+                        all objects are transformed into this space along the transformation
+                        chain.</p></dd><dt>spherical coordinate system, polar coordinates</dt><dd><p>A three dimensional coordinate system where the three coordinates are not
+                        defined by 3 values multiplied by vectors, but by two angles and a radius.
+                        One angle specifies rotation around a point in a known plane. The other
+                        angle specifies rotation above and below this plane. And the radius
+                        specifies the distance from the origin. Spherical coordinates are not a
+                        Euclidean geometry.</p></dd><dt>Euclidean geometry</dt><dd><p>A specific kind of coordinate system that follows certain axioms. For the
+                        sake of brevity, consider it a <span class="quote">&#8220;<span class="quote">regular</span>&#8221;</span> coordinate system, one
+                        that follows the simple, obvious rules one might expect of a 2D sheet of
+                        paper.</p></dd><dt>vertex stream</dt><dd><p>An ordered sequence of vertices given to OpenGL by one of the
+                            <code class="function">glDraw*</code> series of functions.</p></dd><dt>primitive, rendering mode</dt><dd><p>The mechanism used by OpenGL for interpreting and rendering a vertex
+                        stream. Every <code class="function">glDraw*</code> function takes a rendering mode
+                        as its first parameter. The primitive mode defines two things: the primitive
+                        type and the primitive representation.</p></dd><dt>primitive type</dt><dd><p>The kind of object that OpenGL will draw with a vertex stream. OpenGL
+                        draws triangles, but it can also draw points or other things.</p></dd><dt>primitive representation</dt><dd><p>The way the vertex stream is converted into one or more of the primitive
+                        type. Each primitive type consumes a number of vertices; the primitive
+                        representation specifies the manor in which the stream of length N is
+                        converted into a number M of primitives.</p></dd><dt>uniform buffer object</dt><dd><p>A buffer object used to store data for uniform blocks.</p></dd><dt>uniform block</dt><dd><p>A named set of uniform definitions. This set of uniforms is not stored in
+                        the program object, but instead is taken from a buffer object bound to a
+                        buffer object binding point in the OpenGL rendering context.</p><p>There is a limit on the number of uniform blocks a single program object
+                        can use. There is also a per-shader stage limit as well.</p></dd><dt>uniform block layout</dt><dd><p>The way a uniform block is layed out by the GLSL compiler. This determines
+                        whether uniform blocks can be shared with other programs, and whether the
+                        user needs to query the location of each uniform within the block.</p></dd><dt>uniform block index</dt><dd><p>A number, queried from a program object, that represents a particular
+                        uniform block. This number is used to refer to the uniform block in other
+                        functions.</p></dd><dt>uniform buffer binding points</dt><dd><p>An array of locations in the OpenGL context where uniform buffers can be
+                        bound to. Programs can have their uniform blocks associated with one of the
+                        entries in this array. When using such a program, it will use the buffer
+                        object bound to that location to find the data for that uniform
+                        block.</p></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut07 In Review.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 07.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tutorial 08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">In Review&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;8.&nbsp;Getting Oriented</td></tr></table></div></body></html>

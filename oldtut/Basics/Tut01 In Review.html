@@ -1,0 +1,67 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <meta http-equiv="X-UA-Compatible" content="IE=Edge"><title>In Review</title><link rel="stylesheet" href="chunked.css" type="text/css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"><link rel="home" href="../index.html" title="Learning Modern 3D Graphics Programming"><link rel="up" href="Tutorial 01.html" title="Chapter&nbsp;1.&nbsp;Hello, Triangle!"><link rel="prev" href="Tut01 Cleanup.html" title="Cleanup"><link rel="next" href="Tut01 Glossary.html" title="Glossary"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">In Review</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Tut01 Cleanup.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;1.&nbsp;Hello, Triangle!</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Tut01 Glossary.html">Next</a></td></tr></table><hr></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e1902"></a>In Review</h2></div></div></div><p>In this tutorial, you have learned the following:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Buffer objects are linear arrays of memory allocated by OpenGL. They can be
+                    used to store vertex data.</p></li><li class="listitem"><p>GLSL shaders are compiled into shader objects that represent the code to be
+                    executed for a single shader stage. These shader objects can be linked together
+                    to produce a program object, which represent all of the shader code to be
+                    executed during rendering.</p></li><li class="listitem"><p>The <code class="function">glDrawArrays</code> function can be used to draw triangles,
+                    using particular buffer objects as sources for vertex data and the currently
+                    bound program object.</p></li></ul></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e1921"></a>Further Study</h3></div></div></div><p>Even with a simple tutorial like this, there are many things to play around with
+                and investigate.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Change the color value set by the fragment shader to different values. Use
+                        values in the range [0, 1], and then see what happens when you go outside
+                        that range.</p></li><li class="listitem"><p>Change the positions of the vertex data. Keep position values in the [-1,
+                        1] range, then see what happens when triangles go outside this range. Notice
+                        what happens when you change the Z value of the positions (note: nothing
+                        should happen while they're within the range). Keep W at 1.0 for now.</p></li><li class="listitem"><p>Change the values that <code class="function">reshape</code> gives to
+                            <code class="function">glViewport</code>. Make them bigger or smaller than the
+                        window and see what happens. Shift them around to different quadrants within
+                        the window.</p></li><li class="listitem"><p>Change the <code class="function">reshape</code> function so that it respects
+                        aspect ratio. This means that the area rendered to may be smaller than the
+                        window area. Also, try to make it so that it always centers the area within
+                        the window.</p></li><li class="listitem"><p>Change the clear color, using values in the range [0, 1]. Notice how this
+                        interacts with changes to the viewport above.</p></li><li class="listitem"><p>Add another 3 vertices to the list, and change the number of vertices sent
+                        in the <code class="function">glDrawArrays</code> call from 3 to 6. Add more and play
+                        with them.</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a name="d0e1957"></a>OpenGL Functions of Note</h3></div></div></div><div class="glosslist"><dl><dt>glClearColor, glClear</dt><dd><p>These functions clear the current viewable area of the screen.
+                                <code class="function">glClearColor</code> sets the color to clear, while
+                                <code class="function">glClear</code> with the
+                                <code class="literal">GL_COLOR_BUFFER_BIT</code> value causes the image to be
+                            cleared with that color.</p></dd><dt>glGenBuffers, glBindBuffer, glBufferData</dt><dd><p>These functions are used to create and manipulate buffer objects.
+                                <code class="function">glGenBuffers</code> creates one or more buffers,
+                                <code class="function">glBindBuffer</code> attaches it to a location in the
+                            context, and <code class="function">glBufferData</code> allocates memory and
+                            fills this memory with data from the user into the buffer object.</p></dd><dt>glEnableVertexAttribArray, glDisableVertexAttribArray,
+                        glVertexAttribPointer</dt><dd><p>These functions control vertex attribute arrays.
+                                <code class="function">glEnableVertexAttribArray</code> activates the given
+                            attribute index, <code class="function">glDisableVertexAttribArray</code>
+                            deactivates the given attribute index, and
+                                <code class="function">glVertexAttribPointer</code> defines the format and
+                            source location (buffer object) of the vertex data.</p></dd><dt>glDrawArrays</dt><dd><p>This function initiates rendering, using the currently active vertex
+                            attributes and the current program object (among other state). It causes
+                            a number of vertices to be pulled from the attribute arrays in
+                            order.</p></dd><dt>glViewport</dt><dd><p>This function defines the current viewport transform. It defines as a
+                            region of the window, specified by the bottom-left position and a
+                            width/height.</p></dd><dt>glCreateShader, glShaderSource, glCompileShader,
+                        glDeleteShader</dt><dd><p>These functions create a working shader object.
+                                <code class="function">glCreateShader</code> simply creates an empty shader
+                            object of a particular shader stage. <code class="function">glShaderSource</code>
+                            sets strings into that object; multiple calls to this function simply
+                            overwrite the previously set strings.
+                                <code class="function">glCompileShader</code> causes the shader object to be
+                            compiled with the previously set strings.
+                                <code class="function">glDeleteShader</code> causes the shader object to be
+                            deleted.</p></dd><dt>glCreateProgram, glAttachShader, glLinkProgram,
+                        glDetachShader</dt><dd><p>These functions create a working program object.
+                                <code class="function">glCreateProgram</code> creates an empty program
+                            object. <code class="function">glAttachShader</code> attaches a shader object to
+                            that program. Multiple calls attach multiple shader objects.
+                                <code class="function">glLinkProgram</code> links all of the previously
+                            attached shaders into a complete program.
+                                <code class="function">glDetachShader</code> is used to remove a shader
+                            object from the program object; this does not affect the behavior of the
+                            program.</p></dd><dt>glUseProgram</dt><dd><p>This function causes the given program to become the current program.
+                            All rendering taking place after this call will use this program for the
+                            various shader stages. If the program 0 is given, then no program is
+                            current.</p></dd><dt>glGetAttribLocation</dt><dd><p>This function retrieves the attribute index of a named attribute. It
+                            takes the program to find the attribute in, and the name of the input
+                            variable of the vertex shader that the user is looking for the attribute
+                            index to.</p></dd></dl></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Tut01 Cleanup.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="Tutorial 01.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Tut01 Glossary.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Cleanup&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="../index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Glossary</td></tr></table></div></body></html>
